@@ -200,6 +200,29 @@
             text-transform: uppercase;
             letter-spacing: 3px;
             opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .brand-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(45deg, #0066cc, #004499);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 2px solid #0088ff;
+            box-shadow: 0 0 15px rgba(0, 136, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .brand-link:hover {
+            background: linear-gradient(45deg, #0088ff, #0066cc);
+            box-shadow: 0 0 25px rgba(0, 136, 255, 0.6);
+            transform: translateY(-2px);
         }
 
         /* Game Over Screen - Military Style */
@@ -214,16 +237,16 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            color: #ff0000;
+            color: #00ff00;
             text-align: center;
             z-index: 1000;
-            border: 3px solid #ff0000;
+            border: 3px solid #00ff00;
             background-image: repeating-linear-gradient(
                 45deg,
                 transparent,
                 transparent 10px,
-                rgba(255, 0, 0, 0.1) 10px,
-                rgba(255, 0, 0, 0.1) 20px
+                rgba(0, 255, 0, 0.1) 10px,
+                rgba(0, 255, 0, 0.1) 20px
             );
         }
 
@@ -231,13 +254,14 @@
             font-size: 4em;
             font-weight: bold;
             margin-bottom: 20px;
-            text-shadow: 0 0 20px #ff0000;
+            text-shadow: 0 0 20px #00ff00;
             animation: missionFailedFlash 1s infinite alternate;
+            color: #00ff00;
         }
 
         @keyframes missionFailedFlash {
-            from { opacity: 1; text-shadow: 0 0 20px #ff0000; }
-            to { opacity: 0.7; text-shadow: 0 0 40px #ff0000; }
+            from { opacity: 1; text-shadow: 0 0 20px #00ff00; }
+            to { opacity: 0.7; text-shadow: 0 0 40px #00ff00; }
         }
 
         .stats-container {
@@ -267,6 +291,15 @@
             font-weight: bold;
         }
 
+        .game-over-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
         #restartBtn {
             padding: 15px 40px;
             font-size: 18px;
@@ -287,6 +320,39 @@
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(255, 0, 0, 0.6);
             background: linear-gradient(45deg, #ff4444, #ff0000);
+        }
+
+        .semper-admin-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #0066cc, #004499);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 2px solid #0088ff;
+            box-shadow: 0 5px 15px rgba(0, 136, 255, 0.4);
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+        }
+
+        .semper-admin-link:hover {
+            background: linear-gradient(45deg, #0088ff, #0066cc);
+            box-shadow: 0 8px 25px rgba(0, 136, 255, 0.6);
+            transform: translateY(-3px);
+        }
+
+        .training-callout {
+            background: rgba(0, 100, 0, 0.3);
+            border: 2px solid #00ff00;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #00ff00;
         }
 
         /* Achievement notifications */
@@ -364,11 +430,28 @@
         @media (max-width: 768px) {
             .brand-title { font-size: 18px; }
             .brand-subtitle { font-size: 10px; }
+            .brand-link { 
+                font-size: 10px; 
+                padding: 6px 12px; 
+            }
             #hud { font-size: 12px; padding: 10px 15px; }
             .hud-value { font-size: 14px; }
             #ball { width: 40px; height: 40px; }
             #radar { width: 80px; height: 80px; bottom: 10px; right: 10px; }
             .mission-failed { font-size: 2.5em; }
+            .game-over-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .semper-admin-link {
+                font-size: 12px;
+                padding: 10px 20px;
+            }
+            .training-callout {
+                font-size: 12px;
+                padding: 10px;
+                margin: 10px;
+            }
         }
     </style>
 </head>
@@ -378,6 +461,9 @@
         <div id="branding">
             <div class="brand-title">SEMPER ADMIN</div>
             <div class="brand-subtitle">Command & Evade</div>
+            <a href="https://linktr.ee/semperadmin" target="_blank" class="brand-link">
+                🎯 Visit Training Hub
+            </a>
         </div>
 
         <!-- Military HUD -->
@@ -424,6 +510,12 @@
         <!-- Mission Failed Screen -->
         <div id="gameOverScreen">
             <div class="mission-failed">MISSION FAILED</div>
+            
+            <div class="training-callout">
+                <strong>💡 Need Better Administrative Training?</strong><br>
+                Improve your skills with Semper Admin's comprehensive training resources!
+            </div>
+            
             <div class="stats-container">
                 <div class="stat-row">
                     <span class="stat-label">Final Score:</span>
@@ -442,7 +534,14 @@
                     <span class="stat-value" id="maxThreat">MINIMAL</span>
                 </div>
             </div>
-            <button id="restartBtn">New Mission</button>
+            
+            <div class="game-over-buttons">
+                <button id="restartBtn">New Mission</button>
+                <a href="https://linktr.ee/semperadmin" target="_blank" class="semper-admin-link">
+                    🎓 Get Real Training<br>
+                    <small style="font-size: 10px; opacity: 0.8;">Mentor | Manage | Master</small>
+                </a>
+            </div>
         </div>
     </div>
 
